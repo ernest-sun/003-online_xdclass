@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 光影
@@ -30,7 +30,8 @@ public class VideoOrderController {
   private final VideoOrderService videoOrderService;
 
   @PostMapping("/save")
-  public ResultVO<Integer> save(@RequestBody Map<String, Object> videoOrder, HttpServletRequest request) {
+  public ResultVO<Integer> save(@RequestBody Map<String, Object> videoOrder,
+      HttpServletRequest request) {
     try {
       Integer userId = (Integer) request.getAttribute("user_id");
       Integer videoId = (Integer) videoOrder.get("video_id");
