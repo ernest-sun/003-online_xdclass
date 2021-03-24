@@ -31,13 +31,24 @@
   </select>
 
   <insert id="save" parameterType="user">
-    insert into user(
-      name,
-      pwd,
-      head_img,
-      phone,
-      create_time
-    ) values(#{name},#{pwd},#{headImg},#{phone},#{createTime})
+    insert into user(name,
+                     pwd,
+                     head_img,
+                     phone,
+                     create_time)
+    values (#{name}, #{pwd}, #{headImg}, #{phone}, #{createTime})
   </insert>
+
+  <select id="findByPhoneAndPwd" resultType="user">
+    select id,
+           name,
+           pwd,
+           head_img,
+           phone,
+           create_time
+    from user
+    where phone = #{phone}
+      and pwd = #{pwd};
+  </select>
 
 </mapper>

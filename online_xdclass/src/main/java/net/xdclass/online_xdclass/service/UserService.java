@@ -15,4 +15,5 @@ public interface UserService{
 
   int save(Map<String, String> userInfo);
 
+  String findByPhoneAndPwd(Map<String, Object> loginUser);
 }

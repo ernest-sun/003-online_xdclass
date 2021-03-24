@@ -36,8 +36,20 @@ public class UserController {
       return  ResultVO.succeed(rows, "注册成功");
     } catch (Exception e) {
       log.error(e.getMessage(), e);
-      return ResultVO.failed(500, e.getMessage());
+      return ResultVO.failed(e.getMessage());
     }
+  }
+
+  @PostMapping("/login")
+  public ResultVO<String> login(@RequestBody Map<String, Object> loginUser) {
+    try {
+      String token = userService.findByPhoneAndPwd(loginUser);
+      return ResultVO.succeed(token, "登录成功");
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      return ResultVO.failed(e.getMessage());
+    }
+
   }
 
   @GetMapping("/find_by_phone")

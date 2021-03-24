@@ -12,6 +12,7 @@ import net.xdclass.online_xdclass.mapper.UserMapper;
 import net.xdclass.online_xdclass.model.User;
 import net.xdclass.online_xdclass.service.UserService;
 import net.xdclass.online_xdclass.util.CommonUtils;
+import net.xdclass.online_xdclass.util.JWTUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -56,6 +57,19 @@ public class UserServiceImpl implements UserService {
         .filter(u -> userMapper.findByPhone(u.get("phone")) == null)
         .orElseThrow(() -> new BusinessException("电话号码不能重复"));
     return userMapper.save(parseToUser(userInfo));
+  }
+
+  @Override
+  public String findByPhoneAndPwd(Map<String, Object> loginUser) {
+    Optional.ofNullable(loginUser)
+        .filter(u -> u.containsKey("phone") && u.containsKey("pwd"))
+        .orElseThrow(() -> new BusinessException("电话号码和密码不能为空"));
+    User user = userMapper.findByPhoneAndPwd(loginUser.get("phone").toString(),
+        CommonUtils.MD5(loginUser.get("pwd").toString()));
+    Optional.ofNullable(user)
+        .orElseThrow(() -> new BusinessException("密码错误，登录失败"));
+    //返回token
+    return JWTUtils.geneJsonWebToken(user);
   }
 
   /**
