@@ -2,6 +2,7 @@ package net.xdclass.online_xdclass.mapper;
 
 import java.util.List;
 import java.util.Map;
+import net.xdclass.online_xdclass.model.Video;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -19,4 +20,6 @@ public interface VideoMapper {
   List<Map<String, Object>> listBanner();
 
   List<Map<String, Object>> findDetailById(@Param("videoId") int videoId);
+
+  Video findById(@Param("video_id") Integer videoId);
 }

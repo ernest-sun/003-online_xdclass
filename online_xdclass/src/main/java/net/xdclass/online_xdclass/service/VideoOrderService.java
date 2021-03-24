@@ -10,4 +10,5 @@ package net.xdclass.online_xdclass.service;
  */
 public interface VideoOrderService  {
 
+  Integer save(Integer userId, Integer videoId);
 }

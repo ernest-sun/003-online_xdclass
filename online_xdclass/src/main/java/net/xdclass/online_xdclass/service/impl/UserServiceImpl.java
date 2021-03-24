@@ -72,6 +72,14 @@ public class UserServiceImpl implements UserService {
     return JWTUtils.geneJsonWebToken(user);
   }
 
+  @Override
+  public User findByUserId(Integer userId) {
+    Optional.ofNullable(userId).orElseThrow(()->new BusinessException("user_id为空"));
+    User user = userMapper.findByUserId(userId);
+    user.setPwd("");
+    return user;
+  }
+
   /**
    * 解析user对象
    *

@@ -1,5 +1,8 @@
 package net.xdclass.online_xdclass.mapper;
 
+import net.xdclass.online_xdclass.model.VideoOrder;
+import org.apache.ibatis.annotations.Param;
+
 /**
  * <p>
  *  Mapper 接口
@@ -9,5 +12,9 @@ package net.xdclass.online_xdclass.mapper;
  * @since 2021-03-22
  */
 public interface VideoOrderMapper{
+
+  VideoOrder findByUserIdAndVideoIdAndState(@Param("userId") Integer userId, @Param("videoId") Integer videoId, @Param("state") Integer state);
+
+  int saveOrder(VideoOrder videoOrder);
 
 }

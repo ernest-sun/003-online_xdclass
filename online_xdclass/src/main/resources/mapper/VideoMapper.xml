@@ -37,15 +37,41 @@
   </select>
 
   <select id="findDetailById" resultType="map">
-    select
-      v.id, v.title, v.summary, v.cover_img, v.price, v.point, v.create_time,
-      c.id as chapter_id, c.title as chapter_title, c.ordered, c.create_time as chapter_creater_time,
-      e.id as episode_id, e.num, e.title as episode_title, e.ordered as episode_ordered, e.play_url, e.free, e.create_time as episode_create_time
+    select v.id,
+           v.title,
+           v.summary,
+           v.cover_img,
+           v.price,
+           v.point,
+           v.create_time,
+           c.id          as chapter_id,
+           c.title       as chapter_title,
+           c.ordered,
+           c.create_time as chapter_creater_time,
+           e.id          as episode_id,
+           e.num,
+           e.title       as episode_title,
+           e.ordered     as episode_ordered,
+           e.play_url,
+           e.free,
+           e.create_time as episode_create_time
     from video v
            left join chapter c on v.id = c.video_id
            left join episode e on c.id = e.chapter_id
     where v.id = #{videoId}
     order by c.ordered, e.num asc;
+  </select>
+
+  <select id="findById" resultType="video">
+    select id,
+           title,
+           summary,
+           cover_img,
+           price,
+           create_time,
+           point
+    from video
+    where id = #{video_id}
   </select>
 
 </mapper>

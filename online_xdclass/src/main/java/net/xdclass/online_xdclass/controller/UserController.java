@@ -2,8 +2,10 @@ package net.xdclass.online_xdclass.controller;
 
 
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.xdclass.online_xdclass.model.User;
 import net.xdclass.online_xdclass.service.UserService;
 import net.xdclass.online_xdclass.util.ResultVO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +52,18 @@ public class UserController {
       return ResultVO.failed(e.getMessage());
     }
 
+  }
+
+  @GetMapping("/find_by_token")
+  public ResultVO<User> findByToken(HttpServletRequest request) {
+    Integer userId = (Integer) request.getAttribute("user_id");
+    try {
+      User user = userService.findByUserId(userId);
+      return ResultVO.succeed(user);
+    } catch (Exception e) {
+      log.error(e.getMessage(), e);
+      return ResultVO.failed(500, e.getMessage());
+    }
   }
 
   @GetMapping("/find_by_phone")

@@ -1,6 +1,7 @@
 package net.xdclass.online_xdclass.service;
 
 import java.util.Map;
+import net.xdclass.online_xdclass.model.User;
 
 /**
  * <p>
@@ -16,4 +17,6 @@ public interface UserService{
   int save(Map<String, String> userInfo);
 
   String findByPhoneAndPwd(Map<String, Object> loginUser);
+
+  User findByUserId(Integer userId);
 }

@@ -51,4 +51,15 @@
       and pwd = #{pwd};
   </select>
 
+  <select id="findByUserId" resultType="user">
+    select id,
+           name,
+           pwd,
+           head_img,
+           phone,
+           create_time
+    from user
+    where id = #{userId};
+  </select>
+
 </mapper>
