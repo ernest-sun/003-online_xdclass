@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/videoOrder")
+@RequestMapping("/api/v1/pri/Order")
 @RequiredArgsConstructor
 public class VideoOrderController {
 
