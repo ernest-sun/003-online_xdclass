@@ -21,8 +21,13 @@
   </sql>
 
   <select id="listVideo" resultType="map">
-    select
-    <include refid="Base_Column_List"></include>
+    select id,
+           title,
+           summary,
+           cover_img,
+           price,
+           if(create_time, DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%S'), null) as create_time,
+           point
     from video;
   </select>
 
@@ -30,7 +35,7 @@
     select id,
            url,
            img,
-           create_time,
+           if(create_time, DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%S'), null) as create_time,
            weight
     from video_banner
     order by weight asc;
@@ -43,18 +48,18 @@
            v.cover_img,
            v.price,
            v.point,
-           v.create_time,
+           if(v.create_time, DATE_FORMAT(v.create_time, '%Y-%m-%d %H:%i:%S'), null) as create_time,
            c.id          as chapter_id,
            c.title       as chapter_title,
            c.ordered,
-           c.create_time as chapter_creater_time,
+           if(c.create_time, DATE_FORMAT(c.create_time, '%Y-%m-%d %H:%i:%S'), null) as chapter_creater_time,
            e.id          as episode_id,
            e.num,
            e.title       as episode_title,
            e.ordered     as episode_ordered,
            e.play_url,
            e.free,
-           e.create_time as episode_create_time
+           if(e.create_time, DATE_FORMAT(e.create_time, '%Y-%m-%d %H:%i:%S'), null) as episode_create_time
     from video v
            left join chapter c on v.id = c.video_id
            left join episode e on c.id = e.chapter_id

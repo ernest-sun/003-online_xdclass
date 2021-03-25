@@ -94,7 +94,6 @@ public class VideoOrderServiceImpl implements VideoOrderService {
     Optional.ofNullable(userId).orElseThrow(()->new BusinessException("user_id为空"));
     List<Map<String, Object>> orderList = videoOrderMapper.findListByUserId(userId);
     Optional.ofNullable(orderList).orElseThrow(()->new BusinessException("订单列表为空，查询失败"));
-    orderList.stream().forEach(u-> System.out.println(u.get("creat_time")));
     return orderList;
   }
 }
