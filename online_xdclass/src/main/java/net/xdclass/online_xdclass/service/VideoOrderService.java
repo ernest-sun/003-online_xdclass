@@ -1,5 +1,8 @@
 package net.xdclass.online_xdclass.service;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  *  服务类
@@ -11,4 +14,6 @@ package net.xdclass.online_xdclass.service;
 public interface VideoOrderService  {
 
   Integer save(Integer userId, Integer videoId);
+
+  List<Map<String, Object>> findListByUserId(Integer userId);
 }

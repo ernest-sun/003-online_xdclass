@@ -38,7 +38,8 @@
       and state = #{state}
   </select>
 
-  <insert id="saveOrder" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="videoOrder">
+  <insert id="saveOrder" useGeneratedKeys="true" keyColumn="id" keyProperty="id"
+    parameterType="videoOrder">
     insert into video_order(out_trade_no,
                             state,
                             create_time,
@@ -50,5 +51,20 @@
     values (#{outTradeNo}, #{state}, #{createTime}, #{totalFee}, #{videoId}, #{videoTitle},
             #{videoImg}, #{userId})
   </insert>
+
+  <select id="findListByUserId" resultType="map">
+    select id,
+           out_trade_no,
+           state,
+           if(create_time,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%S'),null) as create_time,
+           total_fee,
+           video_id,
+           video_title,
+           video_img,
+           user_id
+    from video_order
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
 
 </mapper>

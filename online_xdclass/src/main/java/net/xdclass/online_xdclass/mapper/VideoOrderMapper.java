@@ -1,5 +1,7 @@
 package net.xdclass.online_xdclass.mapper;
 
+import java.util.List;
+import java.util.Map;
 import net.xdclass.online_xdclass.model.VideoOrder;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +19,5 @@ public interface VideoOrderMapper{
 
   int saveOrder(VideoOrder videoOrder);
 
+  List<Map<String, Object>> findListByUserId(@Param("userId") Integer userId);
 }
