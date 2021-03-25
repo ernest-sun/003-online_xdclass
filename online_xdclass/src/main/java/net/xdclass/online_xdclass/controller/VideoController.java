@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 光影
@@ -38,22 +38,22 @@ public class VideoController {
     CountDownLatch countDownLatch = new CountDownLatch(2);
     try {
       CompletableFuture.supplyAsync(videoService::listVideo)
-          .thenAccept(result->{
+          .thenAccept(result -> {
             countDownLatch.countDown();
             resultMap.put("listVideo", result);
           })
-          .exceptionally(ex->{
+          .exceptionally(ex -> {
             countDownLatch.countDown();
             log.error(ex.getMessage(), ex);
             resultMap.put("listVideo", Maps.newConcurrentMap());
             return null;
           });
       CompletableFuture.supplyAsync(videoService::listBanner)
-          .thenAccept(result->{
+          .thenAccept(result -> {
             countDownLatch.countDown();
             resultMap.put("listBanner", result);
           })
-          .exceptionally(ex->{
+          .exceptionally(ex -> {
             countDownLatch.countDown();
             log.error(ex.getMessage(), ex);
             resultMap.put("listBanner", Maps.newConcurrentMap());
@@ -73,11 +73,13 @@ public class VideoController {
 
   /**
    * 根据id查找视频详情,包含章，集信息
+   *
    * @param videoId
    * @return
    */
   @GetMapping("/find_detail_by_id")
-  public ResultVO<List<Map<String, Object>>> findDetailById(@RequestParam(value = "video_id", required = true) int videoId){
+  public ResultVO<List<Map<String, Object>>> findDetailById(
+      @RequestParam(value = "video_id", required = true) int videoId) {
     try {
       List<Map<String, Object>> resultList = videoService.findDetailById(videoId);
       return ResultVO.succeed(resultList);

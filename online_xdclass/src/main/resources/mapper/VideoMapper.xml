@@ -49,17 +49,19 @@
            v.price,
            v.point,
            if(v.create_time, DATE_FORMAT(v.create_time, '%Y-%m-%d %H:%i:%S'), null) as create_time,
-           c.id          as chapter_id,
-           c.title       as chapter_title,
+           c.id                                                                     as chapter_id,
+           c.title                                                                  as chapter_title,
            c.ordered,
-           if(c.create_time, DATE_FORMAT(c.create_time, '%Y-%m-%d %H:%i:%S'), null) as chapter_creater_time,
-           e.id          as episode_id,
+           if(c.create_time, DATE_FORMAT(c.create_time, '%Y-%m-%d %H:%i:%S'),
+              null)                                                                 as chapter_creater_time,
+           e.id                                                                     as episode_id,
            e.num,
-           e.title       as episode_title,
-           e.ordered     as episode_ordered,
+           e.title                                                                  as episode_title,
+           e.ordered                                                                as episode_ordered,
            e.play_url,
            e.free,
-           if(e.create_time, DATE_FORMAT(e.create_time, '%Y-%m-%d %H:%i:%S'), null) as episode_create_time
+           if(e.create_time, DATE_FORMAT(e.create_time, '%Y-%m-%d %H:%i:%S'),
+              null)                                                                 as episode_create_time
     from video v
            left join chapter c on v.id = c.video_id
            left join episode e on c.id = e.chapter_id

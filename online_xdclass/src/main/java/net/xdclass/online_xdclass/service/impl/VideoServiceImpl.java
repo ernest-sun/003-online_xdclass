@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 光影
@@ -31,6 +31,7 @@ public class VideoServiceImpl implements VideoService {
 
   /**
    * 视频列表
+   *
    * @return
    */
   @Override
@@ -38,8 +39,8 @@ public class VideoServiceImpl implements VideoService {
     try {
       Object cacheObj = baseCache.getTenMinuteCache().get(CacheKeyManager.INDEX_VIDEO_LIST,
           videoMapper::listVideo);
-      Optional.ofNullable(cacheObj).orElseThrow(()->new BusinessException("视频列表不存在"));
-      return (List<Map<String, Object>>)cacheObj;
+      Optional.ofNullable(cacheObj).orElseThrow(() -> new BusinessException("视频列表不存在"));
+      return (List<Map<String, Object>>) cacheObj;
     } catch (Exception e) {
       log.error(e.getMessage(), e);
     }
@@ -48,6 +49,7 @@ public class VideoServiceImpl implements VideoService {
 
   /**
    * 轮播图列表
+   *
    * @return
    */
   @Override
@@ -57,8 +59,8 @@ public class VideoServiceImpl implements VideoService {
         List<Map<String, Object>> listBanner = videoMapper.listBanner();
         return listBanner;
       });
-      Optional.ofNullable(cacheObj).orElseThrow(()->new BusinessException("轮播图列表不存在"));
-      return (List<Map<String, Object>>)cacheObj;
+      Optional.ofNullable(cacheObj).orElseThrow(() -> new BusinessException("轮播图列表不存在"));
+      return (List<Map<String, Object>>) cacheObj;
     } catch (Exception e) {
       log.error(e.getMessage(), e);
     }
@@ -69,9 +71,10 @@ public class VideoServiceImpl implements VideoService {
   public List<Map<String, Object>> findDetailById(int videoId) {
     String videoCacheKey = String.format(CacheKeyManager.VIDEO_DETAIL, videoId);
     try {
-      Object cacheObj = baseCache.getOneHourCache().get(videoCacheKey, () -> videoMapper.findDetailById(videoId));
-      Optional.ofNullable(cacheObj).orElseThrow(()->new BusinessException("视频详情列表不存在"));
-      return (List<Map<String, Object>>)cacheObj;
+      Object cacheObj = baseCache.getOneHourCache()
+          .get(videoCacheKey, () -> videoMapper.findDetailById(videoId));
+      Optional.ofNullable(cacheObj).orElseThrow(() -> new BusinessException("视频详情列表不存在"));
+      return (List<Map<String, Object>>) cacheObj;
     } catch (Exception e) {
       log.error(e.getMessage(), e);
     }
