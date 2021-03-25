@@ -4,8 +4,7 @@ package net.xdclass.online_xdclass.config;
  * ClassName:CacheKeyManager Package:net.xdclass.online_xdclass.config Description:
  *
  * @Date:2021/3/25 13:35
- * @Author:sunzheng@beiming.com
- * 缓存key管理类
+ * @Author:sunzheng@beiming.com 缓存key管理类
  */
 public class CacheKeyManager {
 
