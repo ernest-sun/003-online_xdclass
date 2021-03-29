@@ -19,7 +19,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
     registry.addInterceptor(new CorsInterceptor()).addPathPatterns("/**");
 
     registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/api/v1/*/**")
-        .excludePathPatterns("/api/v1/pri/user/login", "/api/v1/pri/user/register");
+        .excludePathPatterns("/api/v1/pri/user/login", "/api/v1/pri/user/register",
+            "/api/v1/pub/video/all");
 
     WebMvcConfigurer.super.addInterceptors(registry);
   }
