@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xdclass.online_xdclass.mapper.TestMapper">
+
+  <select id="findByPhoneAndPwd" parameterType="Map" resultType="user">
+    select id,
+           name,
+           pwd,
+           head_img,
+           phone,
+           create_time
+    from user
+    where phone = #{map.phone}
+      and pwd = #{map.pwd};
+  </select>
+</mapper>
